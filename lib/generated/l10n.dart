@@ -1,6 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
 import 'intl/messages_all.dart';
 
 // **************************************************************************
@@ -10,18 +11,19 @@ import 'intl/messages_all.dart';
 
 class S {
   S();
-  
-  static const AppLocalizationDelegate delegate =
-    AppLocalizationDelegate();
+
+  static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
   static Future<S> load(Locale locale) {
-    final name = (locale.countryCode?.isEmpty ?? false) ? locale.languageCode : locale.toString();
-    final localeName = Intl.canonicalizedLocale(name); 
+    final name = (locale.countryCode?.isEmpty ?? false)
+        ? locale.languageCode
+        : locale.toString();
+    final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
       return S();
     });
-  } 
+  }
 
   static S of(BuildContext context) {
     return Localizations.of<S>(context, S);
@@ -121,6 +123,15 @@ class S {
     return Intl.message(
       'Submit',
       name: 'submit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get resent {
+    return Intl.message(
+      'Resent',
+      name: 'resent',
       desc: '',
       args: [],
     );
@@ -1134,6 +1145,24 @@ class S {
     );
   }
 
+  String get this_code_confirm_resent_wrong {
+    return Intl.message(
+      'Wrong information',
+      name: 'this_code_confirm_resent_wrong',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get wrong_code_confirm {
+    return Intl.message(
+      'Wrong Code sms',
+      name: 'wrong_email_or_password',
+      desc: '',
+      args: [],
+    );
+  }
+
   String get addresses_refreshed_successfuly {
     return Intl.message(
       'Addresses refreshed successfully',
@@ -1795,6 +1824,15 @@ class S {
     return Intl.message(
       'This email account exists',
       name: 'this_email_account_exists',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get this_code_confirm_wrong {
+    return Intl.message(
+      'This code confirm wrong',
+      name: 'this_code_confirm_wrong',
       desc: '',
       args: [],
     );

@@ -47,12 +47,17 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
           builder: (context, value, child) {
             return Text(
               value.appName ?? S.of(context).home,
-              style: Theme.of(context).textTheme.headline6.merge(TextStyle(letterSpacing: 1.3)),
+              style: Theme.of(context)
+                  .textTheme
+                  .headline6
+                  .merge(TextStyle(letterSpacing: 1.3)),
             );
           },
         ),
         actions: <Widget>[
-          new ShoppingCartButtonWidget(iconColor: Theme.of(context).hintColor, labelColor: Theme.of(context).accentColor),
+          new ShoppingCartButtonWidget(
+              iconColor: Theme.of(context).hintColor,
+              labelColor: Theme.of(context).accentColor),
         ],
       ),
       body: RefreshIndicator(
@@ -86,10 +91,15 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
                       if (currentUser.value.apiToken == null) {
                         _con.requestForCurrentLocation(context);
                       } else {
-                        var bottomSheetController = widget.parentScaffoldKey.currentState.showBottomSheet(
-                          (context) => DeliveryAddressBottomSheetWidget(scaffoldKey: widget.parentScaffoldKey),
+                        var bottomSheetController = widget
+                            .parentScaffoldKey.currentState
+                            .showBottomSheet(
+                          (context) => DeliveryAddressBottomSheetWidget(
+                              scaffoldKey: widget.parentScaffoldKey),
                           shape: RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+                            borderRadius: new BorderRadius.only(
+                                topLeft: Radius.circular(10),
+                                topRight: Radius.circular(10)),
                           ),
                         );
                         bottomSheetController.closed.then((value) {
@@ -107,12 +117,16 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
                     style: Theme.of(context).textTheme.headline4,
                   ),
                   subtitle: Text(
-                    S.of(context).near_to + " " + (settingsRepo.deliveryAddress.value?.address ?? S.of(context).unknown),
+                    S.of(context).near_to +
+                        " " +
+                        (settingsRepo.deliveryAddress.value?.address ??
+                            S.of(context).unknown),
                     style: Theme.of(context).textTheme.caption,
                   ),
                 ),
               ),
-              CardsCarouselWidget(marketsList: _con.topMarkets, heroTag: 'home_top_markets'),
+              CardsCarouselWidget(
+                  marketsList: _con.topMarkets, heroTag: 'home_top_markets'),
               ListTile(
                 dense: true,
                 contentPadding: EdgeInsets.symmetric(horizontal: 20),
@@ -130,7 +144,9 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
                   style: Theme.of(context).textTheme.caption,
                 ),
               ),
-              ProductsCarouselWidget(productsList: _con.trendingProducts, heroTag: 'home_product_carousel'),
+              ProductsCarouselWidget(
+                  productsList: _con.trendingProducts,
+                  heroTag: 'home_product_carousel'),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: ListTile(

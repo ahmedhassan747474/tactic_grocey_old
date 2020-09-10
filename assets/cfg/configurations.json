@@ -1,4 +1,4 @@
 {
-    "base_url": "https://tactic.sa/",
-    "api_base_url": "https://tactic.sa/api/"
+    "base_url": "http://tactic.sa/",
+    "api_base_url": "http://tactic.sa/api/"
 }

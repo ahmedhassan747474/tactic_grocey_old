@@ -13,11 +13,13 @@ import '../models/market.dart';
 import '../models/review.dart';
 import '../repository/user_repository.dart';
 
-Future<Stream<Market>> getNearMarkets(Address myLocation, Address areaLocation) async {
+Future<Stream<Market>> getNearMarkets(
+    Address myLocation, Address areaLocation) async {
   Uri uri = Helper.getUri('api/markets');
   Map<String, dynamic> _queryParams = {};
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  Filter filter = Filter.fromJSON(json.decode(prefs.getString('filter') ?? '{}'));
+  Filter filter =
+      Filter.fromJSON(json.decode(prefs.getString('filter') ?? '{}'));
 
   _queryParams['limit'] = '6';
   if (!myLocation.isUnknown() && !areaLocation.isUnknown()) {
@@ -32,7 +34,16 @@ Future<Stream<Market>> getNearMarkets(Address myLocation, Address areaLocation) 
     final client = new http.Client();
     final streamedRest = await client.send(http.Request('get', uri));
 
-    return streamedRest.stream.transform(utf8.decoder).transform(json.decoder).map((data) => Helper.getData(data)).expand((data) => (data as List)).map((data) {
+    return streamedRest.stream
+        .transform(utf8.decoder)
+        .transform(json.decoder)
+        .map((data) => Helper.getData(data))
+        .expand((data) => (data as List))
+        .map((data) {
+      print('market respositry-------------------');
+      print('market respositry-------------------' + data);
+      print('market respositry-------------------' +
+          Market.fromJSON(data).image.toString());
       return Market.fromJSON(data);
     });
   } catch (e) {
@@ -45,7 +56,8 @@ Future<Stream<Market>> getPopularMarkets(Address myLocation) async {
   Uri uri = Helper.getUri('api/markets');
   Map<String, dynamic> _queryParams = {};
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  Filter filter = Filter.fromJSON(json.decode(prefs.getString('filter') ?? '{}'));
+  Filter filter =
+      Filter.fromJSON(json.decode(prefs.getString('filter') ?? '{}'));
 
   _queryParams['limit'] = '6';
   _queryParams['popular'] = 'all';
@@ -59,7 +71,12 @@ Future<Stream<Market>> getPopularMarkets(Address myLocation) async {
     final client = new http.Client();
     final streamedRest = await client.send(http.Request('get', uri));
 
-    return streamedRest.stream.transform(utf8.decoder).transform(json.decoder).map((data) => Helper.getData(data)).expand((data) => (data as List)).map((data) {
+    return streamedRest.stream
+        .transform(utf8.decoder)
+        .transform(json.decoder)
+        .map((data) => Helper.getData(data))
+        .expand((data) => (data as List))
+        .map((data) {
       return Market.fromJSON(data);
     });
   } catch (e) {
@@ -85,7 +102,12 @@ Future<Stream<Market>> searchMarkets(String search, Address address) async {
     final client = new http.Client();
     final streamedRest = await client.send(http.Request('get', uri));
 
-    return streamedRest.stream.transform(utf8.decoder).transform(json.decoder).map((data) => Helper.getData(data)).expand((data) => (data as List)).map((data) {
+    return streamedRest.stream
+        .transform(utf8.decoder)
+        .transform(json.decoder)
+        .map((data) => Helper.getData(data))
+        .expand((data) => (data as List))
+        .map((data) {
       return Market.fromJSON(data);
     });
   } catch (e) {
@@ -108,7 +130,11 @@ Future<Stream<Market>> getMarket(String id, Address address) async {
     final client = new http.Client();
     final streamedRest = await client.send(http.Request('get', uri));
 
-    return streamedRest.stream.transform(utf8.decoder).transform(json.decoder).map((data) => Helper.getData(data)).map((data) => Market.fromJSON(data));
+    return streamedRest.stream
+        .transform(utf8.decoder)
+        .transform(json.decoder)
+        .map((data) => Helper.getData(data))
+        .map((data) => Market.fromJSON(data));
   } catch (e) {
     print(CustomTrace(StackTrace.current, message: uri.toString()).toString());
     return new Stream.value(new Market.fromJSON({}));
@@ -116,12 +142,18 @@ Future<Stream<Market>> getMarket(String id, Address address) async {
 }
 
 Future<Stream<Review>> getMarketReviews(String id) async {
-  final String url = '${GlobalConfiguration().getString('api_base_url')}market_reviews?with=user&search=market_id:$id';
+  final String url =
+      '${GlobalConfiguration().getString('api_base_url')}market_reviews?with=user&search=market_id:$id';
   try {
     final client = new http.Client();
     final streamedRest = await client.send(http.Request('get', Uri.parse(url)));
 
-    return streamedRest.stream.transform(utf8.decoder).transform(json.decoder).map((data) => Helper.getData(data)).expand((data) => (data as List)).map((data) {
+    return streamedRest.stream
+        .transform(utf8.decoder)
+        .transform(json.decoder)
+        .map((data) => Helper.getData(data))
+        .expand((data) => (data as List))
+        .map((data) {
       return Review.fromJSON(data);
     });
   } catch (e) {
@@ -131,11 +163,17 @@ Future<Stream<Review>> getMarketReviews(String id) async {
 }
 
 Future<Stream<Review>> getRecentReviews() async {
-  final String url = '${GlobalConfiguration().getString('api_base_url')}market_reviews?orderBy=updated_at&sortedBy=desc&limit=3&with=user';
+  final String url =
+      '${GlobalConfiguration().getString('api_base_url')}market_reviews?orderBy=updated_at&sortedBy=desc&limit=3&with=user';
   try {
     final client = new http.Client();
     final streamedRest = await client.send(http.Request('get', Uri.parse(url)));
-    return streamedRest.stream.transform(utf8.decoder).transform(json.decoder).map((data) => Helper.getData(data)).expand((data) => (data as List)).map((data) {
+    return streamedRest.stream
+        .transform(utf8.decoder)
+        .transform(json.decoder)
+        .map((data) => Helper.getData(data))
+        .expand((data) => (data as List))
+        .map((data) {
       return Review.fromJSON(data);
     });
   } catch (e) {
@@ -145,7 +183,8 @@ Future<Stream<Review>> getRecentReviews() async {
 }
 
 Future<Review> addMarketReview(Review review, Market market) async {
-  final String url = '${GlobalConfiguration().getString('api_base_url')}market_reviews';
+  final String url =
+      '${GlobalConfiguration().getString('api_base_url')}market_reviews';
   final client = new http.Client();
   review.user = currentUser.value;
   try {

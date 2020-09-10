@@ -1,5 +1,6 @@
 {
   "search_for_markets_or_products": "ابحث عن الأسواق أو المنتجات",
+  "resent": "اعادة ارسال الرمز",
   "top_markets": "أهم الأسواق",
   "ordered_by_nearby_first": "تم طلبه مسبقًا أولاً",
   "trending_this_week": "تتجه هذا الأسبوع",
@@ -136,7 +137,7 @@
   "email_to_reset_password": "البريد الإلكتروني لإعادة تعيين كلمة المرور",
   "send_password_reset_link": "أرسل الرابط",
   "i_remember_my_password_return_to_login": "أتذكر عودة كلمة المرور الخاصة بي لتسجيل الدخول",
-  "your_reset_link_has_been_sent_to_your_email": "تم إرسال رابط إعادة تعيين إلى البريد الإلكتروني الخاص بك",
+  "your_reset_link_has_been_sent_to_your_email": "تم إرسال كود جديد",
   "error_verify_email_settings": "خطأ! تحقق من إعدادات البريد الإلكتروني",
   "guest": "زائر",
   "you_must_signin_to_access_to_this_section": "يجب عليك تسجيل الدخول للوصول إلى هذا القسم",
@@ -196,6 +197,9 @@
   "click_to_pay_cash_on_delivery": "انقر لدفع نقدا عند التسليم",
   "click_to_pay_on_pickup": "انقر للدفع عند الاستلام",
   "this_email_account_exists": "حساب البريد الإلكتروني هذا موجود",
+  "this_code_confirm_wrong": "الكود خطاء",
+  "this_code_confirm_resent_wrong": " خطاء",
+
   "this_account_not_exist": "هذا الحساب غير موجود",
   "card_number": "رقم البطاقة",
   "expiry_date": "تاريخ الانتهاء",

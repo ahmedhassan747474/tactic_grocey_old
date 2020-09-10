@@ -4,6 +4,7 @@ class User {
   String id;
   String name;
   String email;
+  String code;
   String password;
   String apiToken;
   String deviceToken;
@@ -41,7 +42,9 @@ class User {
       } catch (e) {
         bio = "";
       }
-      image = jsonMap['media'] != null && (jsonMap['media'] as List).length > 0 ? Media.fromJSON(jsonMap['media'][0]) : new Media();
+      image = jsonMap['media'] != null && (jsonMap['media'] as List).length > 0
+          ? Media.fromJSON(jsonMap['media'][0])
+          : new Media();
     } catch (e) {
       print(e);
     }
@@ -52,6 +55,7 @@ class User {
     map["id"] = id;
     map["email"] = email;
     map["name"] = name;
+    map["code"] = code;
     map["password"] = password;
     map["api_token"] = apiToken;
     if (deviceToken != null) {

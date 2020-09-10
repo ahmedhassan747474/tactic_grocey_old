@@ -1,4 +1,8 @@
 {
+  "this_code_confirm_wrong": "sms code wrong",
+  "resent": "resent code sms",
+  "this_code_confirm_resent_wrong": " wrong",
+
   "search_for_markets_or_products": "Search for markets or products",
   "top_markets": "Top Markets",
   "ordered_by_nearby_first": "Ordered by Nearby first",
@@ -136,7 +140,7 @@
   "email_to_reset_password": "Email to reset password",
   "send_password_reset_link": "Send link",
   "i_remember_my_password_return_to_login": "I remember my password return to login",
-  "your_reset_link_has_been_sent_to_your_email": "Your reset link has been sent to your email",
+  "your_reset_link_has_been_sent_to_your_email": "Your reset sms code",
   "error_verify_email_settings": "Error! Verify email settings",
   "guest": "Guest",
   "you_must_signin_to_access_to_this_section": "You must sign-in to access to this section",
