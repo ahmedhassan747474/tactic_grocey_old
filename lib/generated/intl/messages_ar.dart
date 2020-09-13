@@ -134,7 +134,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "email_address":
             MessageLookupByLibrary.simpleMessage("عنوان بريد الكتروني"),
         "email_to_reset_password": MessageLookupByLibrary.simpleMessage(
-            "البريد الإلكتروني لإعادة تعيين كلمة المرور"),
+            "رقم الجوال لإعادة تعيين كلمة المرور"),
         "english": MessageLookupByLibrary.simpleMessage("الإنجليزية"),
         "error_verify_email_settings": MessageLookupByLibrary.simpleMessage(
             "خطأ! تحقق من إعدادات البريد الإلكتروني"),
@@ -235,7 +235,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "not_a_valid_number":
             MessageLookupByLibrary.simpleMessage("رقم غير صالح"),
         "not_a_valid_phone":
-            MessageLookupByLibrary.simpleMessage("ليس هاتفًا صالحًا"),
+            MessageLookupByLibrary.simpleMessage("ليس جوالً صالحًا"),
         "not_deliverable":
             MessageLookupByLibrary.simpleMessage("غير قابل للتسليم"),
         "notifications": MessageLookupByLibrary.simpleMessage("إشعارات"),
@@ -279,7 +279,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("إعدادات المدفوعات"),
         "paypal": MessageLookupByLibrary.simpleMessage("باي بال"),
         "paypal_payment": MessageLookupByLibrary.simpleMessage("الدفع باي بال"),
-        "phone": MessageLookupByLibrary.simpleMessage("هاتف"),
+        "phone": MessageLookupByLibrary.simpleMessage("جوال"),
         "pickup": MessageLookupByLibrary.simpleMessage("امسك"),
         "pickup_your_product_from_the_market":
             MessageLookupByLibrary.simpleMessage(

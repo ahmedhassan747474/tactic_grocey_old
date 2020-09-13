@@ -1,6 +1,8 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:markets/src/pages/confirmcode.dart';
+import 'package:markets/src/pages/confirmcoderesetpassword.dart';
+import 'package:markets/src/pages/newpassword.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../generated/l10n.dart';
@@ -135,11 +137,43 @@ class UserController extends ControllerMVC {
     }
   }
 
-  resentCodeConfirm() async {
+  void newPassword(String phone) async {
     FocusScope.of(context).unfocus();
     if (loginFormKey.currentState.validate()) {
       loginFormKey.currentState.save();
+
+      print('uer controller    registerCodeConfirm()  Overlay -------------- ');
+      print(
+          'uer controller    registerCodeConfirm()  user.phone -------------- ' +
+              user.phone);
+      print(
+          'uer controller    registerCodeConfirm()  user.code -------------- ' +
+              user.newPassword);
+
+      repository.newPassword(user).then((value) {
+        print(
+            'uer controller    registerCodeConfirm()  registerCodeConfirm(user)  -------------- ');
+        if (value != null && value.apiToken != null) {
+          print('(value != null && value.apiToken != null)');
+          Navigator.of(scaffoldKey.currentContext).popUntil((route) => true);
+          Navigator.of(scaffoldKey.currentContext)
+              .pushReplacementNamed('/Pages', arguments: 2);
+        } else {
+          print(
+              'uer controller    registerCodeConfirm()  user.phone -------------- else');
+          scaffoldKey?.currentState?.showSnackBar(SnackBar(
+            content: Text(S.of(context).this_code_confirm_wrong),
+          ));
+        }
+      });
+    }
+  }
+
+  resentCodeConfirm(String phone) async {
+    FocusScope.of(context).unfocus();
+
       Overlay.of(context).insert(loader);
+      print('resentCodeConfirm  phone:' + phone);
       repository.resentCodeConfirm(user).then((value) {
         if (value != null && value == 200) {
           scaffoldKey?.currentState?.showSnackBar(SnackBar(
@@ -161,7 +195,35 @@ class UserController extends ControllerMVC {
       }).whenComplete(() {
         Helper.hideLoader(loader);
       });
-    }
+
+  }
+
+  resentCodeConfirmPassword(String phone) async {
+    FocusScope.of(context).unfocus();
+
+    Overlay.of(context).insert(loader);
+    print('user  phone :  ' + user.phone);
+    repository.resentCodeConfirm(user).then((value) {
+      if (value != null && value == 200) {
+        scaffoldKey?.currentState?.showSnackBar(SnackBar(
+          content:
+              Text(S.of(context).your_reset_link_has_been_sent_to_your_email),
+        ));
+        // '/ConfirmCodeRegister'
+        // _deleteConfirm(scaffoldKey.currentContext);
+      } else {
+        scaffoldKey?.currentState?.showSnackBar(SnackBar(
+          content: Text(S.of(context).this_code_confirm_resent_wrong),
+        ));
+      }
+    }).catchError((e) {
+      loader.remove();
+      scaffoldKey?.currentState?.showSnackBar(SnackBar(
+        content: Text(S.of(context).this_code_confirm_resent_wrong),
+      ));
+    }).whenComplete(() {
+      Helper.hideLoader(loader);
+    });
   }
 
   void registerCodeConfirm() async {
@@ -205,24 +267,50 @@ class UserController extends ControllerMVC {
     }
   }
 
-  void resetPassword() {
+  void registerCodeConfirmResetPassword(String phone) async {
+    FocusScope.of(context).unfocus();
+    if (loginFormKey.currentState.validate()) {
+      loginFormKey.currentState.save();
+
+      print('uer controller    registerCodeConfirm()  Overlay -------------- ');
+      print(
+          'uer controller    registerCodeConfirm()  user.code -------------- ' +
+              user.code);
+      print(
+          'uer controller    registerCodeConfirm()  user.phone -------------- ' +
+              user.phone);
+
+      repository.registerCodeConfirm(user).then((value) {
+        print(
+            'uer controller    registerCodeConfirm()  registerCodeConfirm(user)  -------------- ');
+        if (value != null && value.apiToken != null) {
+          print('(value != null && value.apiToken != null)');
+          Navigator.of(scaffoldKey.currentContext).push(MaterialPageRoute(
+            builder: (context) => NewPassword(phone),
+          ));
+          // Navigator.of(scaffoldKey.currentContext).pop();
+          // Navigator.of(scaffoldKey.currentContext)
+          //     .pushReplacementNamed('/Pages', arguments: 2);
+        } else {
+          print(
+              'uer controller    registerCodeConfirm()  user.phone -------------- else');
+          scaffoldKey?.currentState?.showSnackBar(SnackBar(
+            content: Text(S.of(context).this_code_confirm_wrong),
+          ));
+        }
+      });
+    }
+  }
+
+  void resetPassword(String phone) {
     FocusScope.of(context).unfocus();
     if (loginFormKey.currentState.validate()) {
       loginFormKey.currentState.save();
       Overlay.of(context).insert(loader);
       repository.resetPassword(user).then((value) {
         if (value != null && value == true) {
-          scaffoldKey?.currentState?.showSnackBar(SnackBar(
-            content:
-                Text(S.of(context).your_reset_link_has_been_sent_to_your_email),
-            action: SnackBarAction(
-              label: S.of(context).login,
-              onPressed: () {
-                Navigator.of(scaffoldKey.currentContext)
-                    .pushReplacementNamed('/Login');
-              },
-            ),
-            duration: Duration(seconds: 10),
+          Navigator.of(scaffoldKey.currentContext).push(MaterialPageRoute(
+            builder: (context) => ConfirmCodeResetPassword(phone),
           ));
         } else {
           loader.remove();

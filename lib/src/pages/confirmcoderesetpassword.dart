@@ -6,17 +6,19 @@ import '../controllers/user_controller.dart';
 import '../elements/BlockButtonWidget.dart';
 import '../helpers/app_config.dart' as config;
 
-class ConfirmCodeRegister extends StatefulWidget {
+class ConfirmCodeResetPassword extends StatefulWidget {
   final String phone;
-  ConfirmCodeRegister(this.phone);
+  ConfirmCodeResetPassword(this.phone);
   @override
-  _ConfirmCodeRegisterState createState() => _ConfirmCodeRegisterState();
+  _ConfirmCodeResetPasswordState createState() =>
+      _ConfirmCodeResetPasswordState();
 }
 
-class _ConfirmCodeRegisterState extends StateMVC<ConfirmCodeRegister> {
+class _ConfirmCodeResetPasswordState
+    extends StateMVC<ConfirmCodeResetPassword> {
   UserController _con;
 
-  _ConfirmCodeRegisterState() : super(UserController()) {
+  _ConfirmCodeResetPasswordState() : super(UserController()) {
     _con = controller;
   }
 
@@ -26,7 +28,10 @@ class _ConfirmCodeRegisterState extends StateMVC<ConfirmCodeRegister> {
     return Scaffold(
       key: _con.scaffoldKey,
       resizeToAvoidBottomPadding: false,
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).accentColor,
+        elevation: 0,
+      ),
       body: Stack(
         alignment: AlignmentDirectional.topCenter,
         children: <Widget>[
@@ -122,7 +127,7 @@ class _ConfirmCodeRegisterState extends StateMVC<ConfirmCodeRegister> {
                       onPressed: () {
                         print(widget.phone);
                         _con.user.phone = widget.phone;
-                        _con.registerCodeConfirm();
+                        _con.registerCodeConfirmResetPassword(widget.phone);
                         // _deleteConfirm(context);
                       },
                     ),
@@ -138,7 +143,7 @@ class _ConfirmCodeRegisterState extends StateMVC<ConfirmCodeRegister> {
                       onPressed: () {
                         print(widget.phone);
                         _con.user.phone = widget.phone;
-                        _con.resentCodeConfirm(widget.phone);
+                        _con.resentCodeConfirmPassword(widget.phone);
                         // _deleteConfirm(context);
                       },
                     ),

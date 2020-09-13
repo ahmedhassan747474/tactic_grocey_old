@@ -6,6 +6,7 @@ class User {
   String email;
   String code;
   String password;
+  String newPassword;
   String apiToken;
   String deviceToken;
   String phone;
@@ -57,6 +58,7 @@ class User {
     map["name"] = name;
     map["code"] = code;
     map["password"] = password;
+    map["new-password"] = newPassword;
     map["api_token"] = apiToken;
     if (deviceToken != null) {
       map["device_token"] = deviceToken;

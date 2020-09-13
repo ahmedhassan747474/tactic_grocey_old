@@ -6,17 +6,17 @@ import '../controllers/user_controller.dart';
 import '../elements/BlockButtonWidget.dart';
 import '../helpers/app_config.dart' as config;
 
-class ConfirmCodeRegister extends StatefulWidget {
+class NewPassword extends StatefulWidget {
   final String phone;
-  ConfirmCodeRegister(this.phone);
+  NewPassword(this.phone);
   @override
-  _ConfirmCodeRegisterState createState() => _ConfirmCodeRegisterState();
+  _NewPasswordState createState() => _NewPasswordState();
 }
 
-class _ConfirmCodeRegisterState extends StateMVC<ConfirmCodeRegister> {
+class _NewPasswordState extends StateMVC<NewPassword> {
   UserController _con;
 
-  _ConfirmCodeRegisterState() : super(UserController()) {
+  _NewPasswordState() : super(UserController()) {
     _con = controller;
   }
 
@@ -26,7 +26,10 @@ class _ConfirmCodeRegisterState extends StateMVC<ConfirmCodeRegister> {
     return Scaffold(
       key: _con.scaffoldKey,
       resizeToAvoidBottomPadding: false,
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).accentColor,
+        elevation: 0,
+      ),
       body: Stack(
         alignment: AlignmentDirectional.topCenter,
         children: <Widget>[
@@ -77,22 +80,33 @@ class _ConfirmCodeRegisterState extends StateMVC<ConfirmCodeRegister> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     TextFormField(
-                      keyboardType: TextInputType.phone,
-                      onSaved: (input) => _con.user.code = input,
-                      validator: (input) => input.trim().length < 3
-                          ? S.of(context).not_a_valid_phone
+                      obscureText: _con.hidePassword,
+                      onSaved: (input) => _con.user.newPassword = input,
+                      validator: (input) => input.length < 6
+                          ? S.of(context).should_be_more_than_6_letters
                           : null,
                       decoration: InputDecoration(
-                        labelText: "Sms",
+                        labelText: S.of(context).password,
                         labelStyle:
                             TextStyle(color: Theme.of(context).accentColor),
                         contentPadding: EdgeInsets.all(12),
-                        hintText: '__ __ __ __',
+                        hintText: '••••••••••••',
                         hintStyle: TextStyle(
                             color:
                                 Theme.of(context).focusColor.withOpacity(0.7)),
-                        prefixIcon: Icon(Icons.verified_user,
+                        prefixIcon: Icon(Icons.lock_outline,
                             color: Theme.of(context).accentColor),
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _con.hidePassword = !_con.hidePassword;
+                            });
+                          },
+                          color: Theme.of(context).focusColor,
+                          icon: Icon(_con.hidePassword
+                              ? Icons.visibility
+                              : Icons.visibility_off),
+                        ),
                         border: OutlineInputBorder(
                             borderSide: BorderSide(
                                 color: Theme.of(context)
@@ -122,27 +136,13 @@ class _ConfirmCodeRegisterState extends StateMVC<ConfirmCodeRegister> {
                       onPressed: () {
                         print(widget.phone);
                         _con.user.phone = widget.phone;
-                        _con.registerCodeConfirm();
+                        _con.newPassword(widget.phone);
                         // _deleteConfirm(context);
                       },
                     ),
                     SizedBox(
                       height: 30,
                     ),
-                    BlockButtonWidget(
-                      text: Text(
-                        S.of(context).resent1,
-                        style: TextStyle(color: Theme.of(context).primaryColor),
-                      ),
-                      color: Theme.of(context).accentColor,
-                      onPressed: () {
-                        print(widget.phone);
-                        _con.user.phone = widget.phone;
-                        _con.resentCodeConfirm(widget.phone);
-                        // _deleteConfirm(context);
-                      },
-                    ),
-                    SizedBox(height: 25),
                   ],
                 ),
               ),

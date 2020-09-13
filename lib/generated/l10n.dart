@@ -128,7 +128,7 @@ class S {
     );
   }
 
-  String get resent {
+  String get resent1 {
     return Intl.message(
       'Resent',
       name: 'resent',
@@ -1291,7 +1291,7 @@ class S {
 
   String get your_reset_link_has_been_sent_to_your_email {
     return Intl.message(
-      'Your reset link has been sent to your email',
+      "send code successful",
       name: 'your_reset_link_has_been_sent_to_your_email',
       desc: '',
       args: [],
