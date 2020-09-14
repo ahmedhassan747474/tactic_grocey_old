@@ -180,7 +180,7 @@ Future<void> setCreditCard(CreditCard creditCard) async {
 
 Future<User> getCurrentUser() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  prefs.clear();
+  // prefs.clear();
   if (currentUser.value.auth == null && prefs.containsKey('current_user')) {
     currentUser.value =
         User.fromJSON(json.decode(await prefs.get('current_user')));

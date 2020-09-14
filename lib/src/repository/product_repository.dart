@@ -67,6 +67,8 @@ Future<Stream<Product>> getProduct(String productId) async {
         .map((data) {
       print('---------------------------------------------------------');
       print(data);
+      print(data);
+      print(Product.fromJSON(data));
       return Product.fromJSON(data);
     });
   } catch (e) {
