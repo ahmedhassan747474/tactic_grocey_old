@@ -14,7 +14,7 @@ description: markets
 version: 1.7.0
 
 environment:
-  sdk: ">=2.2.2 <3.0.0"
+  sdk: ">=2.10.0 <3.0.0"
 module:
   androidX: true
 dependencies:
